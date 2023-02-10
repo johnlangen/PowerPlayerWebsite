@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<style>
+    h1 {
+        font-size: 48px;
+        color: #333;
+        text-align: center;
+        margin-top: 50px;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 700;
+    }
+
+    h2 {
+        font-size: 36px;
+        color: #555;
+        margin-top: 50px;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 600;
+    }
+
+    p {
+        font-size: 18px;
+        color: #777;
+        line-height: 1.5;
+        margin-bottom: 20px;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 400;
+    }
+
+    ul {
+        list-style-type: none;
+        padding-left: 0;
+    }
+
+    li {
+        font-size: 18px;
+        color: #777;
+        margin-bottom: 10px;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 400;
+    }
+
+    form {
+        margin-top: 50px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    label {
+        font-size: 18px;
+        color: #555;
+        margin-bottom: 10px;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 400;
+    }
+
+    input, textarea {
+        width: 600px;
+        height: 60px;
+        padding: 20px;
+        font-size: 18px;
+        border-radius: 10px;
+        border: 2px solid #ccc;
+        margin-bottom: 20px;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 400;
+    }
+
+    textarea {
+        height: 200px;
+    }
+
+    button {
+        width: 200px;
+        height: 60px;
+        background-color: #333;
+        color: #fff;
+        font-size: 18px;
+        border-radius: 10px;
+        border: none;
+        cursor: pointer;
+        margin-top: 20px;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 400;
+    }
+</style>
+
+<h1>Homepage</h1>
+<p>Welcome to the PowerPlayer! Join us to earn money for your sports knowledge without having to wager any real money. We provide free competitions, so you can compete against
+    many around the world and put your skills to the test. </p>
+<h2>Our Services</h2>
+<p>We provide sports betting services</p>
+<ul>
+    <li>Game predictions
+        Predictions from our website's own top models, including proprietery AI
+        Our neural networks have been trained for the most profitable trends each season,
+        to help you maximize your bankroll
+    </li>
+    <li>User competitions
+        Compete against other users to gain prizes!
+        There are free competitions which reset weekly, which any player can win.
+        $1 competitions which reset weekly, which build the bankroll for that competitions
+        And program competitions for machine learning (or any basic) alrorithms to win prizes
+        Each week for each sport and category there will be a PowerPlayer who will win the top prize! How many time can you become a PowerPlayer?
+    </li>
+    <li>User chats
+        Chat about the games, and your strategies with others from the site.
+        Pick one team which you follow closely, and if you are the top predictor you will be given a special title and prize every month.
+    </li>
+
+</ul>
+<h2>Why Choose Us</h2>
+<p>Back the AI:</p>
+<ul>
+    <li>See what our top AI algorithms have to say, which are created by top analysis</li>
+    <li>Create your own algorithms to compete for free</li>
+    <li>Represent your team and help others win</li>
+</ul>
+<h2>Contact Us</h2>
+<p>If you have any questions or would like to get in touch with us, please send us a message:</p>
+<form>
+    <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name">
+    </div>
+    <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email">
+    </div>
+    <div>
+        <label for="message">Message:</label>
+        <textarea id="message" name="message"></textarea>
+    </div>
+    <button type="submit">Send Message</button>
+</form>
+{% endblock %}
+
+# for code
+from django.core.mail import send_mail
+
+def send_email(request):
+    if request.method == 'POST':
+        form_data = request.POST
+        send_mail(
+            'Subject',
+            'Here is the message.',
+            'from@example.com',
+            ['johnlangenderfer123@gmail.com'],
+            fail_silently=False,
+        )
+    return redirect('home')
+
+

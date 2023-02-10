@@ -1,0 +1,18 @@
+<nav>
+    {% url 'public:index' as index_url %}
+    <span>{% if request.path == index_url %}Home{% else%} <a href="{% url 'public:index' %}">Home</a>{% endif %}</span>
+    {% url 'public:leaderboards' as leaderboards %}
+    <span>{% if request.path == leaderboards %}leaderboards{% else%} <a href="{% url 'public:leaderboards' %}">leaderboards</a>{% endif %}</span>
+    {% url 'public:contact' as contact_url %}
+    <span>{% if request.path == contact_url %}Contact{% else%} <a href="{% url 'public:contact' %}">Contact</a>{% endif %}</span>
+
+    <span style="float:right">
+        {% if user.is_authenticated%}
+            <span>Hi {{ user.username}}</span>
+            <span><a href="{%url 'logout' %}">Logout</a>  </span>
+        {%else %}
+            <span><a href="{%url 'login' %}">Login</a>  </span>
+        {%endif%}
+    </span>
+
+</nav>
