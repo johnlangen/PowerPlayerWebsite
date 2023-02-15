@@ -23,4 +23,4 @@ def api(request):
 
     if response.status_code == 200:
         data2 = response.json()
-        
+

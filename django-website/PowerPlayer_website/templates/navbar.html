@@ -1,18 +1,81 @@
-<nav>
-    {% url 'public:index' as index_url %}
-    <span>{% if request.path == index_url %}Home{% else%} <a href="{% url 'public:index' %}">Home</a>{% endif %}</span>
-    {% url 'public:leaderboards' as leaderboards %}
-    <span>{% if request.path == leaderboards %}leaderboards{% else%} <a href="{% url 'public:leaderboards' %}">leaderboards</a>{% endif %}</span>
-    {% url 'public:contact' as contact_url %}
-    <span>{% if request.path == contact_url %}Contact{% else%} <a href="{% url 'public:contact' %}">Contact</a>{% endif %}</span>
-
-    <span style="float:right">
-        {% if user.is_authenticated%}
-            <span>Hi {{ user.username}}</span>
-            <span><a href="{%url 'logout' %}">Logout</a>  </span>
-        {%else %}
-            <span><a href="{%url 'login' %}">Login</a>  </span>
-        {%endif%}
-    </span>
-
-</nav>
+<style>
+    .navbar {
+       background-color: black;
+       color: white;
+       font-family: "Open Sans", sans-serif;
+       font-size: 16px;
+       height: 50px;
+       display: flex;
+       justify-content: space-between;
+       align-items: center;
+    }
+    
+    
+    .navbar-link {
+       text-decoration: none;
+       color: inherit;
+       padding: 10px;
+       position: relative;
+    }
+    
+    
+    .navbar-link::after {
+       content: "";
+       position: absolute;
+       width: 100%;
+       height: 2px;
+       bottom: 0;
+       left: 0;
+       background-color: white;
+       transform: scaleX(0);
+       transform-origin: bottom right;
+       transition: transform 0.2s ease-out;
+    }
+    
+    
+    .navbar-link:hover::after {
+       transform: scaleX(1);
+       transform-origin: bottom left;
+    }
+    
+    
+    .active {
+       background-color: gray;
+    }
+    
+    
+    .navbar-user {
+       display: flex;
+       align-items: center;
+    }
+    
+    
+    .navbar-welcome {
+       margin-right: 10px;
+    }
+    
+    
+    
+    
+       </style>
+      
+       <nav class="navbar">
+           <div class="navbar-items">
+               <a href="{% url 'public:index' %}" class="navbar-link {% if request.path == index_url %}active{% endif %}">Home</a>
+               <a href="{% url 'public:leaderboards' %}" class="navbar-link {% if request.path == leaderboards %}active{% endif %}">Leaderboards</a>
+               <a href="{% url 'public:contact' %}" class="navbar-link {% if request.path == contact_url %}active{% endif %}">Contact</a>
+           </div>
+           <div class="navbar-user">
+               {% if user.is_authenticated%}
+                   <span class="navbar-welcome">Hi {{ user.username}}</span>
+                   <a href="{%url 'logout' %}" class="navbar-link">Logout</a>
+               {% else %}
+                   <a href="{%url 'login' %}" class="navbar-link">Login</a>
+               {% endif %}
+           </div>
+       </nav>
+    
+    
+      
+    
+    
