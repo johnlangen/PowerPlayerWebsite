@@ -23,6 +23,7 @@
     }
 
     p {
+        text-align: center;
         font-size: 18px;
         color: #777;
         line-height: 1.5;
@@ -90,57 +91,27 @@
     }
 </style>
 
-<h1>Homepage</h1>
-<p>Welcome to the PowerPlayer! Join us to earn money for your sports knowledge without having to wager any real money. We provide free competitions, so you can compete against
-    many around the world and put your skills to the test. </p>
-<h2>Our Services</h2>
-<p>We provide sports betting services</p>
-<ul>
-    <li>Game predictions
-        Predictions from our website's own top models, including proprietery AI
-        Our neural networks have been trained for the most profitable trends each season,
-        to help you maximize your bankroll
-    </li>
-    <li>User competitions
-        Compete against other users to gain prizes!
-        There are free competitions which reset weekly, which any player can win.
-        $1 competitions which reset weekly, which build the bankroll for that competitions
-        And program competitions for machine learning (or any basic) alrorithms to win prizes
-        Each week for each sport and category there will be a PowerPlayer who will win the top prize! How many time can you become a PowerPlayer?
-    </li>
-    <li>User chats
-        Chat about the games, and your strategies with others from the site.
-        Pick one team which you follow closely, and if you are the top predictor you will be given a special title and prize every month.
-    </li>
+<h1>Home</h1>
+<p>Summarize your text. Enter what you want summarized, then choose the amount of sentences you want it summarized in.</p>
 
-</ul>
-<h2>Why Choose Us</h2>
-<p>Back the AI:</p>
-<ul>
-    <li>See what our top AI algorithms have to say, which are created by top analysis</li>
-    <li>Create your own algorithms to compete for free</li>
-    <li>Represent your team and help others win</li>
-</ul>
-<h2>Contact Us</h2>
-<p>If you have any questions or would like to get in touch with us, please send us a message:</p>
-<h4>Random Number Generator</h4>
-<p>Here is your random number: {{ random_number }}</p>
 
-<form>
-    <div>
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name">
-    </div>
-    <div>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email">
-    </div>
-    <div>
-        <label for="message">Message:</label>
-        <textarea id="message" name="message"></textarea>
-    </div>
-    <button type="submit">Send Message</button>
+
+
+<h1>Summarize Your Text</h1>
+<form method="post">
+    {% csrf_token %}
+    <label for="text">Enter your text:</label><br>
+    <textarea id="text" name="text" rows="4" cols="50">{{ text }}</textarea><br>
+    <label for="num_sentences">Number of sentences:</label>
+    <input type="number" id="num_sentences" name="num_sentences" value="{{ num_sentences }}" min="1" style="width: 50px;"><br>
+    <input type="submit" value="Summarize">
 </form>
+{% if summary %}
+    <h2 style="text-align:center;">Summary ({{ num_sentences }} {% if num_sentences == 1 %}sentence{% else %}sentences{% endif %}):</h2>
+    <p style="text-align:center;">{{ summary }}</p>
+{% endif %}
+
+
 {% endblock %}
 
 # for code
